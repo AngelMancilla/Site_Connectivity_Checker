@@ -6,6 +6,12 @@ def read_user_cli_args():
         prog='Site Connectivity Checker', description='Check the availability of websites'
     )
     parser.add_argument(
+        '-a',
+        '--asynchronous',
+        action='store_true',
+        help='run the connectivity check asynchronously',
+    )
+    parser.add_argument(
         '-u',
         '--urls',
         metavar='URLs',
@@ -28,6 +34,6 @@ def display_check_result(result, url, error=''):
     """Display the result of the check."""
     print(f'The status of "{url}" is:', end=" ")
     if result:
-        print('"Online!" 👍')
+        print(f'"Online!, time response: {round(result[1], 2)} Seconds." 👍')
     else:
-        print(f'"Offline?" 👎 \n  Error: "{error}"')
+        print(f'"Offline?" ❌ \n  Error: "{error}"')
